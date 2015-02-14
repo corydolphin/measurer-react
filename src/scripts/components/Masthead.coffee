@@ -1,14 +1,10 @@
-`/** @jsx React.DOM */`
+React = require 'react'
 
 Masthead = React.createClass
   render: () ->
-    `(
-      <div className='bs-masthead'>
-        <div className="container">
-          <h1>{this.props.title}</h1>
-          <p className="lead">{this.props.children}</p>
-        </div>
-      </div>
-    )`
+      React.DOM.div {className: "bs-masthead"},
+        React.DOM.div {className: "container"},
+          React.DOM.h1 null, "this.props.title",
+          React.DOM.p {className: "lead"}, "this.props.children"
 
 module.exports = Masthead

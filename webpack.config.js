@@ -1,5 +1,6 @@
 var path = require("path");
 var webpack = require("webpack");
+var BowerWebpackPlugin = require("bower-webpack-plugin");
 module.exports = {
   // This is the main file that should include all other JS files
   entry: "./src/scripts/main.coffee",
@@ -18,7 +19,7 @@ module.exports = {
   },
   resolve: {
     // Tell webpack to look for required files in bower and node
-    modulesDirectories: ['bower_components', 'node_modules'],
+    modulesDirectories: ['bower_components', 'node_modules', 'src/scripts'],
   },
   module: {
     loaders: [
@@ -26,13 +27,13 @@ module.exports = {
       { test: /\.gif/, loader: "url-loader?limit=10000&minetype=image/gif" },
       { test: /\.jpg/, loader: "url-loader?limit=10000&minetype=image/jpg" },
       { test: /\.png/, loader: "url-loader?limit=10000&minetype=image/png" },
-      { test: /\.js$/, loader: "jsx-loader" },
-      { test: /\.coffee$/, loader: "jsx-loader!coffee-loader" }
+      { test: /\.coffee$/, loader: "coffee-loader" }
     ],
     noParse: /\.min\.js/
   },
   plugins: [
     // If you want to minify everything
     // new webpack.optimize.UglifyJsPlugin()
+    new BowerWebpackPlugin()
   ]
 };
