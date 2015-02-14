@@ -59,7 +59,7 @@ gulp.task 'webpack', (callback) ->
 gulp.task 'dev', ['build'], ->
   servers = createServers(httpPort, 35729)
   # When /src changes, fire off a rebuild
-  gulp.watch ['./src/**/*'], (evt) -> gulp.run 'build'
+  gulp.watch ['./src/**/*', 'webpack.config.js', 'bower.json', 'gulpfile.coffee'], (evt) -> gulp.run 'build'
   # When /dist changes, tell the browser to reload
   gulp.watch ['./dist/**/*'], (evt) ->
     gutil.log(gutil.colors.cyan(evt.path), 'changed')
@@ -99,6 +99,3 @@ execWebpack = (config) ->
   webpack config, (err, stats) ->
     if (err) then throw new gutil.PluginError("execWebpack", err)
     gutil.log("[execWebpack]", stats.toString({colors: true}))
-
-
-
